@@ -1,0 +1,24 @@
+#include "file_creator.hpp"
+#include <iostream>
+
+int main() {
+    std::string file_path = "/path/to/your/files"; 
+    seneca::example::file_creator creator(file_path);
+
+    // Example usage
+    nlohmann::json json_object = {
+        {"students", {
+            {"id", 23}, {"name", "Benedict"},
+            {"id", 80}, {"name", "Octavio"},
+            {"id", 75}, {"name", "Olivia"},
+            {"id", 90}, {"name", "Noah"}
+        }}
+    };
+
+    creator.create_file(json_object, "example.json");
+
+    nlohmann::json read_object = creator.read_file("example.json");
+    std::cout << "Read JSON: " << read_object.dump() << std::endl;
+
+    return 0;
+}
